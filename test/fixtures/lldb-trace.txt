@@ -1,0 +1,54 @@
+#0  0x00000001000049a6 in node::FSEventWrap::Start(v8::FunctionCallbackInfo<v8::Value> const&) at /Users/thlorenz/dev/js/node/src/fs_event_wrap.cc:115
+#1  0x00000001002e812c in v8::internal::FunctionCallbackArguments::Call(void (*)(v8::FunctionCallbackInfo<v8::Value> const&)) at /Users/thlorenz/dev/js/node/deps/v8/src/arguments.cc:33
+#2  0x000000010032b9e4 in v8::internal::Object* v8::internal::HandleApiCallHelper<false>(v8::internal::(anonymous namespace)::BuiltinArguments<(v8::internal::BuiltinExtraArguments)1>, v8::internal::Isolate*) at /Users/thlorenz/dev/js/node/deps/v8/src/builtins.cc:1145
+#3  0x000000010032b495 in v8::internal::Builtin_Impl_HandleApiCall(v8::internal::(anonymous namespace)::BuiltinArguments<(v8::internal::BuiltinExtraArguments)1>, v8::internal::Isolate*) at /Users/thlorenz/dev/js/node/deps/v8/src/builtins.cc:1162
+#4  0x00000001003253c0 in v8::internal::Builtin_HandleApiCall(int, v8::internal::Object**, v8::internal::Isolate*) at /Users/thlorenz/dev/js/node/deps/v8/src/builtins.cc:1161
+#5  0x00001226b65063ae in Stub:CEntryStub ()
+#6  0x00001226b6542c13 in LazyCompile:~FSWatcher.start fs.js:1067 ()
+#7  0x00001226b65fe8f5 in LazyCompile:~fs.watch fs.js:1082 ()
+#8  0x00001226b65062b5 in Builtin:A builtin from the snapshot ()
+#9  0x00001226b65fe54b in LazyCompile:~watchIndex /Users/thlorenz/dev/talks/memory-profiling/example/app.js:32 ()
+#10 0x00001226b65fe029 in LazyCompile:~onRequest /Users/thlorenz/dev/talks/memory-profiling/example/app.js:42 ()
+#11 0x00001226b656f0df in LazyCompile:~emit events.js:68 ()
+#12 0x00001226b65062b5 in Builtin:A builtin from the snapshot ()
+#13 0x00001226b65fc4f8 in LazyCompile:~parserOnIncoming _http_server.js:420 ()
+#14 0x00001226b65f95d2 in LazyCompile:~parserOnHeadersComplete _http_common.js:63 ()
+#15 0x00001226b6557f80 in Builtin:A builtin from the snapshot ()
+#16 0x00001226b652e3f1 in Stub:JSEntryStub ()
+#17 0x000000010049b99c in v8::internal::Invoke(bool, v8::internal::Handle<v8::internal::JSFunction>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) at /Users/thlorenz/dev/js/node/deps/v8/src/execution.cc:91
+#18 0x000000010049b3d3 in v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*, bool) at /Users/thlorenz/dev/js/node/deps/v8/src/execution.cc:141
+#19 0x00000001002ad87e in v8::Function::Call(v8::Handle<v8::Value>, int, v8::Handle<v8::Value>*) at /Users/thlorenz/dev/js/node/deps/v8/src/api.cc:4118
+#20 0x0000000100049725 in node::Parser::on_headers_complete_() at /Users/thlorenz/dev/js/node/src/node_http_parser.cc:292
+#21 0x000000010004700c in node::Parser::on_headers_complete(http_parser*) at /Users/thlorenz/dev/js/node/src/node_http_parser.cc:241
+#22 0x000000010097c004 in http_parser_execute at /Users/thlorenz/dev/js/node/deps/http_parser/http_parser.c:1653
+#23 0x0000000100047459 in node::Parser::Execute(v8::FunctionCallbackInfo<v8::Value> const&) at /Users/thlorenz/dev/js/node/src/node_http_parser.cc:404
+#24 0x00000001002e812c in v8::internal::FunctionCallbackArguments::Call(void (*)(v8::FunctionCallbackInfo<v8::Value> const&)) at /Users/thlorenz/dev/js/node/deps/v8/src/arguments.cc:33
+#25 0x000000010032b9e4 in v8::internal::Object* v8::internal::HandleApiCallHelper<false>(v8::internal::(anonymous namespace)::BuiltinArguments<(v8::internal::BuiltinExtraArguments)1>, v8::internal::Isolate*) at /Users/thlorenz/dev/js/node/deps/v8/src/builtins.cc:1145
+#26 0x000000010032b495 in v8::internal::Builtin_Impl_HandleApiCall(v8::internal::(anonymous namespace)::BuiltinArguments<(v8::internal::BuiltinExtraArguments)1>, v8::internal::Isolate*) at /Users/thlorenz/dev/js/node/deps/v8/src/builtins.cc:1162
+#27 0x00000001003253c0 in v8::internal::Builtin_HandleApiCall(int, v8::internal::Object**, v8::internal::Isolate*) at /Users/thlorenz/dev/js/node/deps/v8/src/builtins.cc:1161
+#28 0x00001226b65063ae in Stub:CEntryStub ()
+#29 0x00001226b65f89ba in LazyCompile:~socketOnData _http_server.js:340 ()
+#30 0x00001226b656f07e in LazyCompile:~emit events.js:68 ()
+#31 0x00001226b65062b5 in Builtin:A builtin from the snapshot ()
+#32 0x00001226b65f80c5 in LazyCompile:~readableAddChunk _stream_readable.js:138 ()
+#33 0x00001226b65f7b3d in LazyCompile:~Readable.push _stream_readable.js:114 ()
+#34 0x00001226b65062b5 in Builtin:A builtin from the snapshot ()
+#35 0x00001226b65f6326 in LazyCompile:~onread net.js:500 ()
+#36 0x00001226b65062b5 in Builtin:A builtin from the snapshot ()
+#37 0x00001226b6557f7c in Builtin:A builtin from the snapshot ()
+#38 0x00001226b652e3f1 in Stub:JSEntryStub ()
+#39 0x000000010049b99c in v8::internal::Invoke(bool, v8::internal::Handle<v8::internal::JSFunction>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) at /Users/thlorenz/dev/js/node/deps/v8/src/execution.cc:91
+#40 0x000000010049b3d3 in v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*, bool) at /Users/thlorenz/dev/js/node/deps/v8/src/execution.cc:141
+#41 0x00000001002ad87e in v8::Function::Call(v8::Handle<v8::Value>, int, v8::Handle<v8::Value>*) at /Users/thlorenz/dev/js/node/deps/v8/src/api.cc:4118
+#42 0x0000000100005db8 in node::AsyncWrap::MakeCallback(v8::Handle<v8::Function>, int, v8::Handle<v8::Value>*) at /Users/thlorenz/dev/js/node/src/async-wrap-inl.h:183
+#43 0x00000001000057db in node::AsyncWrap::MakeCallback(v8::Handle<v8::String>, int, v8::Handle<v8::Value>*) at /Users/thlorenz/dev/js/node/src/async-wrap-inl.h:235
+#44 0x0000000100064294 in node::StreamWrapCallbacks::DoRead(uv_stream_s*, long, uv_buf_t const*, uv_handle_type) at /Users/thlorenz/dev/js/node/src/stream_wrap.cc:734
+#45 0x0000000100061db9 in node::StreamWrap::OnReadCommon(uv_stream_s*, long, uv_buf_t const*, uv_handle_type) at /Users/thlorenz/dev/js/node/src/stream_wrap.cc:157
+#46 0x0000000100061c26 in node::StreamWrap::OnRead(uv_stream_s*, long, uv_buf_t const*) at /Users/thlorenz/dev/js/node/src/stream_wrap.cc:172
+#47 0x00000001009a422b in uv__read at /Users/thlorenz/dev/js/node/deps/uv/src/unix/stream.c:1138
+#48 0x000000010099fb4c in uv__stream_io at /Users/thlorenz/dev/js/node/deps/uv/src/unix/stream.c:1201
+#49 0x00000001009ae5c6 in uv__io_poll at /Users/thlorenz/dev/js/node/deps/uv/src/unix/kqueue.c:232
+#50 0x0000000100992ecc in uv_run at /Users/thlorenz/dev/js/node/deps/uv/src/unix/core.c:325
+#51 0x000000010001fab5 in node::Start(int, char**) at /Users/thlorenz/dev/js/node/src/node.cc:3798
+#52 0x000000010004a282 in main at /Users/thlorenz/dev/js/node/src/node_main.cc:65
+#53 0x0000000100001934 in start ()
