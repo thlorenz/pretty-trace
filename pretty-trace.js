@@ -17,7 +17,7 @@ exports.line =
 /**
  * Prettifies the given line.
  * 
- * @name prettifyTrace::line
+ * @name prettyTrace::line
  * @function
  * @param {string}   line           the line to be prettified
  * @param {Object}   theme          theme that specifies how to prettify a trace
@@ -64,10 +64,10 @@ exports.lines =
 /**
  * Prettifies multiple lines.
  * 
- * @name prettifyTrace::lines
+ * @name prettyTrace::lines
  * @function
  * @param {Array.<string>} lines lines to be prettified
- * @param {Object} theme theme that specifies how to prettify a trace @see prettifyTrace::line
+ * @param {Object} theme theme that specifies how to prettify a trace @see prettyTrace::line
  * @return {Array.<string>} the prettified lines
  */
 function prettyLines(lines, theme) {
@@ -85,7 +85,7 @@ function prettyLines(lines, theme) {
 /**
  * A theme that colorizes the given trace using ANSI color codes.
  * 
- * @name prettifyTrace::terminalTheme
+ * @name prettyTrace::terminalTheme
  */
 exports.terminalTheme = {
     raw      : colors.white
@@ -104,7 +104,7 @@ function spanClass(clazz, link) {
 /**
  * A theme that surrounds the given trace using with spans classed `trace-*` in order to allow styling with CSS.
  * 
- * @name prettifyTrace::htmlTheme
+ * @name prettyTrace::htmlTheme
  */
 exports.htmlTheme = {
     raw      : spanClass('trace-raw')
@@ -114,13 +114,23 @@ exports.htmlTheme = {
   , location : spanClass('trace-location')
 }
 
+/**
+ * Regex used to match debug traces created by tools like lldb.
+ * 
+ * @name prettyTrace::debugTraceRegex
+ */
 exports.debugTraceRegex = lldbRegex;
+
+/**
+ * Regex used to match callgraphs generated with Mac Instruments and exported as csv.
+ * 
+ * @name prettyTrace::instrumentsCsvRegex 
+ */
 exports.instrumentsCsvRegex = instrumentsCsvRegex;
 
-// Test
-var fs = require('fs')
-if (!module.parent && typeof window === 'undefined') {
-  var lines = fs.readFileSync(__dirname + '/test/fixtures/perf-script.txt', 'utf8').split('\n');
-  var res = exports.lines(lines, exports.terminalTheme);
-  console.log(res.join('\n'))
-}
+/**
+ * Regex used to match callgraphs generated running Linux `perf script`.
+ * 
+ * @name prettyTrace::perfScriptRegex 
+ */
+exports.perfScriptRegex = perfScriptRegex ;

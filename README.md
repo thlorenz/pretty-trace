@@ -34,7 +34,25 @@ console.log(prettyLines.join('\n'))
 </div>
 <dl>
 <dt>
-<h4 class="name" id="prettifyTrace::htmlTheme"><span class="type-signature"></span>prettifyTrace::htmlTheme<span class="type-signature"></span></h4>
+<h4 class="name" id="prettyTrace::debugTraceRegex"><span class="type-signature"></span>prettyTrace::debugTraceRegex<span class="type-signature"></span></h4>
+</dt>
+<dd>
+<div class="description">
+<p>Regex used to match debug traces created by tools like lldb.</p>
+</div>
+<dl class="details">
+<dt class="tag-source">Source:</dt>
+<dd class="tag-source"><ul class="dummy">
+<li>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
+<span>, </span>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L117">lineno 117</a>
+</li>
+</ul></dd>
+</dl>
+</dd>
+<dt>
+<h4 class="name" id="prettyTrace::htmlTheme"><span class="type-signature"></span>prettyTrace::htmlTheme<span class="type-signature"></span></h4>
 </dt>
 <dd>
 <div class="description">
@@ -46,13 +64,49 @@ console.log(prettyLines.join('\n'))
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L80">lineno 80</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L104">lineno 104</a>
 </li>
 </ul></dd>
 </dl>
 </dd>
 <dt>
-<h4 class="name" id="prettifyTrace::terminalTheme"><span class="type-signature"></span>prettifyTrace::terminalTheme<span class="type-signature"></span></h4>
+<h4 class="name" id="prettyTrace::instrumentsCsvRegex"><span class="type-signature"></span>prettyTrace::instrumentsCsvRegex<span class="type-signature"></span></h4>
+</dt>
+<dd>
+<div class="description">
+<p>Regex used to match callgraphs generated with Mac Instruments and exported as csv.</p>
+</div>
+<dl class="details">
+<dt class="tag-source">Source:</dt>
+<dd class="tag-source"><ul class="dummy">
+<li>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
+<span>, </span>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L124">lineno 124</a>
+</li>
+</ul></dd>
+</dl>
+</dd>
+<dt>
+<h4 class="name" id="prettyTrace::perfScriptRegex"><span class="type-signature"></span>prettyTrace::perfScriptRegex<span class="type-signature"></span></h4>
+</dt>
+<dd>
+<div class="description">
+<p>Regex used to match callgraphs generated running Linux <code>perf script</code>.</p>
+</div>
+<dl class="details">
+<dt class="tag-source">Source:</dt>
+<dd class="tag-source"><ul class="dummy">
+<li>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
+<span>, </span>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L131">lineno 131</a>
+</li>
+</ul></dd>
+</dl>
+</dd>
+<dt>
+<h4 class="name" id="prettyTrace::terminalTheme"><span class="type-signature"></span>prettyTrace::terminalTheme<span class="type-signature"></span></h4>
 </dt>
 <dd>
 <div class="description">
@@ -64,7 +118,7 @@ console.log(prettyLines.join('\n'))
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L61">lineno 61</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L85">lineno 85</a>
 </li>
 </ul></dd>
 </dl>
@@ -72,7 +126,7 @@ console.log(prettyLines.join('\n'))
 </dl>
 <dl>
 <dt>
-<h4 class="name" id="prettifyTrace::line"><span class="type-signature"></span>prettifyTrace::line<span class="signature">(line, theme)</span><span class="type-signature"> &rarr; {string}</span></h4>
+<h4 class="name" id="prettyTrace::line"><span class="type-signature"></span>prettyTrace::line<span class="signature">(line, theme)</span><span class="type-signature"> &rarr; {string}</span></h4>
 </dt>
 <dd>
 <div class="description">
@@ -158,7 +212,7 @@ console.log(prettyLines.join('\n'))
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L9">lineno 9</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L17">lineno 17</a>
 </li>
 </ul></dd>
 </dl>
@@ -176,7 +230,7 @@ Type
 </dl>
 </dd>
 <dt>
-<h4 class="name" id="prettifyTrace::lines"><span class="type-signature"></span>prettifyTrace::lines<span class="signature">(lines, theme)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
+<h4 class="name" id="prettyTrace::lines"><span class="type-signature"></span>prettyTrace::lines<span class="signature">(lines, theme)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
 </dt>
 <dd>
 <div class="description">
@@ -204,7 +258,7 @@ Type
 <td class="type">
 <span class="param-type">Object</span>
 </td>
-<td class="description last"><p>theme that specifies how to prettify a trace @see prettifyTrace::line</p></td>
+<td class="description last"><p>theme that specifies how to prettify a trace @see prettyTrace::line</p></td>
 </tr>
 </tbody>
 </table>
@@ -214,7 +268,7 @@ Type
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L40">lineno 40</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L64">lineno 64</a>
 </li>
 </ul></dd>
 </dl>
