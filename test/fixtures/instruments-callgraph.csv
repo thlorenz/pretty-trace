@@ -1,0 +1,27 @@
+Running Time,Self,,Symbol Name
+69.0ms  100.0%,0, ,Main Thread  0x1261fe
+69.0ms  100.0%,0, , start
+69.0ms  100.0%,0, ,  node::Start(int, char**)
+67.0ms   97.1%,0, ,   uv_run
+67.0ms   97.1%,0, ,    uv__run_timers
+67.0ms   97.1%,0, ,     node::TimerWrap::OnTimeout(uv_timer_s*)
+67.0ms   97.1%,0, ,      node::AsyncWrap::MakeCallback(v8::Handle<v8::Function>, int, v8::Handle<v8::Value>*)
+67.0ms   97.1%,0, ,       v8::Function::Call(v8::Handle<v8::Value>, int, v8::Handle<v8::Value>*)
+67.0ms   97.1%,0, ,        v8::internal::Invoke(bool, v8::internal::Handle<v8::internal::JSFunction>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*)
+67.0ms   97.1%,0, ,         0x38852ff1decf
+67.0ms   97.1%,0, ,          0x38852ff1ef7f
+67.0ms   97.1%,0, ,           0x38852ffccbb9
+7.0ms   10.1%,7, ,            0x38852ffd486e
+7.0ms   10.1%,0, ,            0x38852ffd4a91
+7.0ms   10.1%,0, ,             0x38852ff0625b
+7.0ms   10.1%,0, ,              v8::internal::Runtime_AllocateInTargetSpace(int, v8::internal::Object**, v8::internal::Isolate*)
+7.0ms   10.1%,0, ,               v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationSpace)
+7.0ms   10.1%,0, ,                v8::internal::Heap::CollectGarbage(v8::internal::GarbageCollector, char const*, char const*, v8::GCCallbackFlags)
+7.0ms   10.1%,0, ,                 v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags)
+7.0ms   10.1%,0, ,                  v8::internal::Heap::Scavenge()
+3.0ms    4.3%,0, ,                   v8::internal::StoreBuffer::IteratePointersToNewSpace(void (*)(v8::internal::HeapObject**, v8::internal::HeapObject*), bool)
+3.0ms    4.3%,0, ,                    v8::internal::StoreBuffer::PrepareForIteration()
+3.0ms    4.3%,3, ,                     v8::internal::StoreBuffer::Compact()
+3.0ms    4.3%,3, ,                   v8::internal::HeapObjectIterator::Next()
+1.0ms    1.4%,0, ,                   _pthread_mutex_lock
+1.0ms    1.4%,1, ,                    pthread_threadid_np

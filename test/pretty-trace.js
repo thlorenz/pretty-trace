@@ -43,3 +43,27 @@ test('\nlldb trace single line', function (t) {
   )
   t.end()
 })
+
+test('\ninstruments callgraph single line', function (t) {
+  var p;
+  var unresolvedLine = '67.0ms   97.1%,0, ,         0x38852ff1decf'
+  var resolvedLine = '67.0ms   97.1%,0, ,     node::TimerWrap::OnTimeout(uv_timer_s*)'
+  
+  p = pretty.line(unresolvedLine, testTheme)
+  t.equal(p
+    , '-number 67.0 number- ' + 
+      'ms-location    97.1% location- ' +
+      '-address          0x38852ff1decf address-'
+    , 'correctly prettifies unresolved callgraph line'
+  )
+
+  p = pretty.line(resolvedLine, testTheme)
+  t.equal(p
+    , '-number 67.0 number- ms' + 
+      '-location    97.1% location- ' + 
+      '-symbol      node::TimerWrap::OnTimeout(uv_timer_s*) symbol-'
+    , 'correctly prettifies resolved callgraph line'
+  )
+
+  t.end()
+})

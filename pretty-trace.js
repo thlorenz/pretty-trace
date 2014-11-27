@@ -4,6 +4,11 @@ var colors = require('ansicolors');
 //                #10  0x1234a23b in node::Parser::on_headers_complete(http_parser*) at node_http_parser.cc:241
 var lldbRegex = /^#(:?\d+)\W+(:?0x(?:(?:\d|[abcdefABCDEF]){0,2})+)\W+in\W+(:?.+?)(?:\W+at\W+(:?.+)){0,1}$/m
 
+// Captures include white space to maintain indentation
+//                        67.0ms   97.1%,0, ,     node::TimerWrap::OnTimeout(uv_timer_s*)
+//                        67.0ms   97.1%,0, ,         0x38852ff1decf
+var instrumentsCsvRegex = /^(:?[0-9.]+)(:?ms|s)(:?\W+[0-9.]+%),\d+,\W+,(:?\W+0x(?:(?:\d|[abcdefABCDEF]){2})+){0,1}(:?.+?){0,1}$/m;
+
 exports.line = 
 
 /**
@@ -30,6 +35,15 @@ function prettyLine(line, theme) {
             + theme.address(address)
             + ' in ' + theme.symbol(symbol)
             + (location ? ' at ' + theme.location(location) : '')
+    })
+  }
+  if (instrumentsCsvRegex.test(line)) { 
+    return line.replace(instrumentsCsvRegex, function (match, time, timeUnit, percent, address, symbol) {
+      return theme.number(time) + ' ' 
+           + timeUnit 
+           + theme.location(percent) + ' ' 
+           + (address ? theme.address(address) : '') 
+           + (symbol ? theme.symbol(symbol) : '')
     })
   }
   return theme.raw(line);
@@ -71,7 +85,7 @@ exports.terminalTheme = {
   , location : colors.brightBlack
 }
 
-function spanClass(clazz) {
+function spanClass(clazz, link) {
   return function span(x) {
     return '<span class="' + clazz + '">' + x + '</span>';
   }
@@ -89,3 +103,7 @@ exports.htmlTheme = {
   , symbol   : spanClass('trace-symbol')
   , location : spanClass('trace-location')
 }
+
+exports.debugTraceRegex = lldbRegex;
+exports.instrumentsCsvRegex = instrumentsCsvRegex;
+
