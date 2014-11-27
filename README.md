@@ -1,5 +1,7 @@
 # pretty-trace [![build status](https://secure.travis-ci.org/thlorenz/pretty-trace.png)](http://travis-ci.org/thlorenz/pretty-trace)
 
+[![testling badge](https://ci.testling.com/thlorenz/pretty-trace.png)](https://ci.testling.com/thlorenz/pretty-trace)
+
 Prettifies traces emitted by tools like lldb.
 
 ```js
