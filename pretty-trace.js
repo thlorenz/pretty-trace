@@ -89,11 +89,3 @@ exports.htmlTheme = {
   , symbol   : spanClass('trace-symbol')
   , location : spanClass('trace-location')
 }
-
-// Test
-var fs = require('fs')
-if (!module.parent && typeof window === 'undefined') {
-  var lines = fs.readFileSync(__dirname + '/test/fixtures/lldb-trace.txt', 'utf8').split('\n');
-  var res = exports.lines(lines, exports.terminalTheme);
-  console.log(res.join('\n'))
-}
