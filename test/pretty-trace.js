@@ -67,3 +67,35 @@ test('\ninstruments callgraph single line', function (t) {
 
   t.end()
 })
+
+test('\n`perf script` result single line', function (t) {
+  var p;
+  var execLine = '        89dd46 v8::internal::UseIterator::UseIterator(v8::internal::LInstruction*) (/usr/local/bin/node)'
+  var libLine = '   7f8f7aac6ec5 __libc_start_main (/lib/x86_64-linux-gnu/libc-2.19.so)'
+  var headerLine = 'node 22610 13108.220321: cpu-clock:u:'
+
+  p = pretty.line(execLine, testTheme)
+
+  t.equal(p
+    , '-address         89dd46 address- ' +
+      '-symbol v8::internal::UseIterator::UseIterator(v8::internal::LInstruction*)  symbol- ' +
+      '-location (/usr/local/bin/node) location-'
+    , 'correctly prettifies line with executable preserving whitespace'
+  )
+
+  p = pretty.line(libLine, testTheme)
+  t.equal(p
+    , '-address    7f8f7aac6ec5 address- ' + 
+      '-symbol __libc_start_main  symbol- ' + 
+      '-location (/lib/x86_64-linux-gnu/libc-2.19.so) location-'
+    , 'correctly prettifies line with lib preserving whitespace'
+  )
+
+  p = pretty.line(headerLine, testTheme)
+  t.equal(p
+    , '-raw node 22610 13108.220321: cpu-clock:u: raw-'
+    , 'leaves header line (without leading white space) as raw'
+  )
+
+  t.end()
+})

@@ -9,6 +9,9 @@ var lldbRegex = /^#(:?\d+)\W+(:?0x(?:(?:\d|[abcdefABCDEF]){0,2})+)\W+in\W+(:?.+?
 //                        67.0ms   97.1%,0, ,         0x38852ff1decf
 var instrumentsCsvRegex = /^(:?[0-9.]+)(:?ms|s)(:?\W+[0-9.]+%),\d+,\W+,(:?\W+0x(?:(?:\d|[abcdefABCDEF]){2})+){0,1}(:?.+?){0,1}$/m;
 
+//                        89dd46 v8::internal::UseIterator::UseIterator(v8::internal::LInstruction*) (/usr/local/bin/node)
+var perfScriptRegex = /^(:?\W+(?:(?:\d|[abcdefABCDEF]){2})+){0,1}\W+(:?.+?){1}(:?\([^()]+\)){0,1}$/m
+
 exports.line = 
 
 /**
@@ -46,6 +49,13 @@ function prettyLine(line, theme) {
            + (symbol ? theme.symbol(symbol) : '')
     })
   }
+  if (perfScriptRegex.test(line)) { 
+    return line.replace(perfScriptRegex, function (match, address, symbol, process) {
+      return  theme.address(address) + ' '
+            + theme.symbol(symbol) + ' '
+            + theme.location(process);
+    })
+  }
   return theme.raw(line);
 }
 
@@ -78,7 +88,7 @@ function prettyLines(lines, theme) {
  * @name prettifyTrace::terminalTheme
  */
 exports.terminalTheme = {
-    raw      : colors.brightBlue
+    raw      : colors.white
   , number   : colors.blue
   , address  : colors.brightBlack
   , symbol   : colors.brightBlue
@@ -107,3 +117,10 @@ exports.htmlTheme = {
 exports.debugTraceRegex = lldbRegex;
 exports.instrumentsCsvRegex = instrumentsCsvRegex;
 
+// Test
+var fs = require('fs')
+if (!module.parent && typeof window === 'undefined') {
+  var lines = fs.readFileSync(__dirname + '/test/fixtures/perf-script.txt', 'utf8').split('\n');
+  var res = exports.lines(lines, exports.terminalTheme);
+  console.log(res.join('\n'))
+}
