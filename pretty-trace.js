@@ -1,10 +1,8 @@
 'use strict';
 var colors = require('ansicolors');
 
-// TODO: make in part non-greedy
 //                #10  0x1234a23b in node::Parser::on_headers_complete(http_parser*) at node_http_parser.cc:241
-var lldbRegex = /^#(:?\d+)\W+(:?0x(?:(?:\d|[abcdefABCDEF]){0,2})+)\W+in\W+(:?.+)(?:\W+at\W+(:?.+){0,1})$/m
-// ((?:\W+at\W+(:?.+))|(?:\W(:?.+)\:\d+\W\(\))){0,1}
+var lldbRegex = /^#(:?\d+)\W+(:?0x(?:(?:\d|[abcdefABCDEF]){0,2})+)\W+in\W+(:?.+?)(?:\W+at\W+(:?.+)){0,1}$/m
 
 exports.line = function prettyLine(line, theme) {
   if (!line) throw new Error('Please supply a line');
