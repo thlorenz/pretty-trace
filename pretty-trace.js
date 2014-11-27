@@ -4,7 +4,23 @@ var colors = require('ansicolors');
 //                #10  0x1234a23b in node::Parser::on_headers_complete(http_parser*) at node_http_parser.cc:241
 var lldbRegex = /^#(:?\d+)\W+(:?0x(?:(?:\d|[abcdefABCDEF]){0,2})+)\W+in\W+(:?.+?)(?:\W+at\W+(:?.+)){0,1}$/m
 
-exports.line = function prettyLine(line, theme) {
+exports.line = 
+
+/**
+ * Prettifies the given line.
+ * 
+ * @name prettifyTrace::line
+ * @function
+ * @param {string}   line           the line to be prettified
+ * @param {Object}   theme          theme that specifies how to prettify a trace
+ * @param {function} theme.raw      invoked to surround an unparsable line
+ * @param {function} theme.number   invoked to surround the frame number
+ * @param {function} theme.address  invoked to surround the hex address
+ * @param {function} theme.symbol   invoked to surround the symbol corresponding to the address, i.e. a function name
+ * @param {function} theme.location invoked to surround the location in the file at which the symbol is found
+ * @return {string}  prettified line
+ */
+function prettyLine(line, theme) {
   if (!line) throw new Error('Please supply a line');
   if (!theme) throw new Error('Please supply a theme');
 
@@ -19,7 +35,18 @@ exports.line = function prettyLine(line, theme) {
   return theme.raw(line);
 }
 
-exports.lines = function prettyLines(lines, theme) {
+exports.lines = 
+
+/**
+ * Prettifies multiple lines.
+ * 
+ * @name prettifyTrace::lines
+ * @function
+ * @param {Array.<string>} lines lines to be prettified
+ * @param {Object} theme theme that specifies how to prettify a trace @see prettifyTrace::line
+ * @return {Array.<string>} the prettified lines
+ */
+function prettyLines(lines, theme) {
   if (!lines || !Array.isArray(lines)) throw new Error('Please supply an array of lines');
   if (!theme) throw new Error('Please supply a theme');
 
@@ -31,6 +58,11 @@ exports.lines = function prettyLines(lines, theme) {
   return lines.map(prettify);
 }
 
+/**
+ * A theme that colorizes the given trace using ANSI color codes.
+ * 
+ * @name prettifyTrace::terminalTheme
+ */
 exports.terminalTheme = {
     raw      : colors.brightBlue
   , number   : colors.blue
@@ -45,18 +77,22 @@ function spanClass(clazz) {
   }
 }
 
+/**
+ * A theme that surrounds the given trace using with spans classed `trace-*` in order to allow styling with CSS.
+ * 
+ * @name prettifyTrace::htmlTheme
+ */
 exports.htmlTheme = {
-    raw      : spanClass('stack-raw')
-  , number   : spanClass('stack-number')
-  , address  : spanClass('stack-address')
-  , symbol   : spanClass('stack-symbol')
-  , location : spanClass('stack-location')
+    raw      : spanClass('trace-raw')
+  , number   : spanClass('trace-number')
+  , address  : spanClass('trace-address')
+  , symbol   : spanClass('trace-symbol')
+  , location : spanClass('trace-location')
 }
 
 // Test
 var fs = require('fs')
 if (!module.parent && typeof window === 'undefined') {
-//  var line = '#0  0x00000001000049a6 in node::FSEventWrap::Start(v8::FunctionCallbackInfo<v8::Value> const&) at /Users/thlorenz/dev/js/node/src/fs_event_wrap.cc:115'
   var lines = fs.readFileSync(__dirname + '/test/fixtures/lldb-trace.txt', 'utf8').split('\n');
   var res = exports.lines(lines, exports.terminalTheme);
   console.log(res.join('\n'))
