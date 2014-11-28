@@ -106,6 +106,7 @@ exports.terminalTheme = {
 
 function spanClass(clazz, link) {
   return function span(x) {
+    if (!x) return '';
     if (link) { 
       x = '<a href="file://' + x.split(':')[0] +'">' + x + '</a>';
     }
