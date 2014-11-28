@@ -1,8 +1,9 @@
 'use strict';
 var colors = require('ansicolors');
 
-//                #10  0x1234a23b in node::Parser::on_headers_complete(http_parser*) at node_http_parser.cc:241
-var lldbRegex = /^#(:?\d+\W+)(:?0x(?:(?:\d|[abcdefABCDEF]){0,2})+)\W+in\W+(:?.+?)(?:\W+at\W+(:?.+)){0,1}$/m
+//                #9  0x00001226b65fe54b in LazyCompile:~watchIndex /Users/thlorenz/dev/talks/memory-profiling/example/app.js:32 ()
+//                #10 0x1234a23b in node::Parser::on_headers_complete(http_parser*) at node_http_parser.cc:241
+var lldbRegex = /^#(:?\d+\W+)(:?0x(?:(?:\d|[abcdefABCDEF]){0,2})+)\W+in\W+(:?.+?)(?:\W+at\W+(:?.+)){0,1}(?:(:?(?:[/\\][^/\\]+?)+\:\d+)\W+\(\)){0,1}$/m
 
 // Captures include white space to maintain indentation
 //                        67.0ms   97.1%,0, ,     node::TimerWrap::OnTimeout(uv_timer_s*)
@@ -33,7 +34,15 @@ function prettyLine(line, theme) {
   if (!theme) throw new Error('Please supply a theme');
 
   if (lldbRegex.test(line)) { 
-    return line.replace(lldbRegex, function (match, number, address, symbol, location) {
+    return line.replace(lldbRegex, function (match, number, address, symbol, location, jitLocation) {
+      var fc;
+      location = location || jitLocation;
+      if (location) {
+        // complete file path to make it clickable in the terminal and browser
+        fc = location.slice(0, 1)
+        location = fc != '/' && fc != '~' ? '/' + location : location;
+      }
+
       return  theme.number('#' + number) + ' ' 
             + theme.address(address)
             + ' in ' + theme.symbol(symbol)
@@ -97,6 +106,9 @@ exports.terminalTheme = {
 
 function spanClass(clazz, link) {
   return function span(x) {
+    if (link) { 
+      x = '<a href="file://' + x.split(':')[0] +'">' + x + '</a>';
+    }
     return '<span class="' + clazz + '">' + x + '</span>';
   }
 }
@@ -111,7 +123,7 @@ exports.htmlTheme = {
   , number   : spanClass('trace-number')
   , address  : spanClass('trace-address')
   , symbol   : spanClass('trace-symbol')
-  , location : spanClass('trace-location')
+  , location : spanClass('trace-location', true)
 }
 
 /**

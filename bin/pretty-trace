@@ -9,5 +9,6 @@ var split = require('split2')
 process.stdin
   .pipe(split())
   .on('data', function (line) {
+    if (!line || !line.length) return;
     process.stdout.write(pretty.line(line, pretty.terminalTheme) + '\n');
   })

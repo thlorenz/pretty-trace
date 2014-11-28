@@ -52,7 +52,7 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L117">lineno 117</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L129">lineno 129</a>
 </li>
 </ul></dd>
 </dl>
@@ -70,7 +70,7 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L104">lineno 104</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L116">lineno 116</a>
 </li>
 </ul></dd>
 </dl>
@@ -88,7 +88,7 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L124">lineno 124</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L136">lineno 136</a>
 </li>
 </ul></dd>
 </dl>
@@ -106,7 +106,7 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L131">lineno 131</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L143">lineno 143</a>
 </li>
 </ul></dd>
 </dl>
@@ -124,7 +124,7 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L85">lineno 85</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L94">lineno 94</a>
 </li>
 </ul></dd>
 </dl>
@@ -218,7 +218,7 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L17">lineno 17</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L18">lineno 18</a>
 </li>
 </ul></dd>
 </dl>
@@ -274,7 +274,7 @@ Type
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L64">lineno 64</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L73">lineno 73</a>
 </li>
 </ul></dd>
 </dl>

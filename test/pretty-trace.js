@@ -22,6 +22,7 @@ test('\nlldb trace single line', function (t) {
   var p;
   var inAtLine = '#0  0x00000001000049a6 in node::FSEventWrap::Start(v8::FunctionCallbackInfo<v8::Value> const&) at /Users/thlorenz/dev/js/node/src/fs_event_wrap.cc:115'
   var inLine = '#6  0x00001226b6542c13 in LazyCompile:~FSWatcher.start fs.js:1067 ()'
+  var inLineWithPath = '#9   0x00001226b65fe54b in LazyCompile:~watchIndex /Users/thlorenz/dev/talks/memory-profiling/example/app.js:32 ()'
 
   p = pretty.line(inAtLine, testTheme)
 
@@ -29,7 +30,7 @@ test('\nlldb trace single line', function (t) {
     , '-number #0   number- ' +
       '-address 0x00000001000049a6 address- ' +
       'in -symbol node::FSEventWrap::Start(v8::FunctionCallbackInfo<v8::Value> const symbol- ' +
-      'at -location Users/thlorenz/dev/js/node/src/fs_event_wrap.cc:115 location-'
+      'at -location /Users/thlorenz/dev/js/node/src/fs_event_wrap.cc:115 location-'
     , 'correctly prettifies "#x 0x0000 in ... at ..." type trace'
   )
 
@@ -41,6 +42,18 @@ test('\nlldb trace single line', function (t) {
       'in -symbol LazyCompile:~FSWatcher.start fs.js:1067 () symbol-'
     , 'correclty prettifies "#x 0x0000 in ..." type trace'
   )
+
+  p = pretty.line(inLineWithPath, testTheme)
+
+  t.equal(p
+    , '-number #9    number- ' +
+      '-address 0x00001226b65fe54b address- ' +
+      'in -symbol LazyCompile:~watchIndex  symbol- ' +
+      'at -location /Users/thlorenz/dev/talks/memory-profiling/example/app.js:32 location-'
+    , 'correctly prettifies "#x 0x0000 in ... /path/to/file:xx" type trace"'
+  )
+
+
   t.end()
 })
 
