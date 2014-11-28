@@ -1,6 +1,6 @@
 {
   "name": "pretty-trace",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Stacktrace prettyfier with theme support.",
   "main": "pretty-trace.js",
   "scripts": {
@@ -21,7 +21,12 @@
   "devDependencies": {
     "tape": "~3.0.3"
   },
-  "keywords": [ "pretty", "trace", "stack", "highlight" ],
+  "keywords": [
+    "pretty",
+    "trace",
+    "stack",
+    "highlight"
+  ],
   "author": {
     "name": "Thorsten Lorenz",
     "email": "thlorenz@gmx.de",
