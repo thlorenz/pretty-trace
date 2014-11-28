@@ -15,6 +15,12 @@ console.log(prettyLines.join('\n'))
 
 ![lldb-trace](https://raw.githubusercontent.com/thlorenz/pretty-trace/master/assets/lldb-trace.png)
 
+## CLI
+
+```
+cat ./test/fixtures/lldb-trace.txt | pretty-trace
+```
+
 ## Installation
 
     npm install pretty-trace

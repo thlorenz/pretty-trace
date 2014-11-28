@@ -2,7 +2,7 @@
 var colors = require('ansicolors');
 
 //                #10  0x1234a23b in node::Parser::on_headers_complete(http_parser*) at node_http_parser.cc:241
-var lldbRegex = /^#(:?\d+)\W+(:?0x(?:(?:\d|[abcdefABCDEF]){0,2})+)\W+in\W+(:?.+?)(?:\W+at\W+(:?.+)){0,1}$/m
+var lldbRegex = /^#(:?\d+\W+)(:?0x(?:(?:\d|[abcdefABCDEF]){0,2})+)\W+in\W+(:?.+?)(?:\W+at\W+(:?.+)){0,1}$/m
 
 // Captures include white space to maintain indentation
 //                        67.0ms   97.1%,0, ,     node::TimerWrap::OnTimeout(uv_timer_s*)

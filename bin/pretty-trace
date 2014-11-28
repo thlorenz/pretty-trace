@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+/*vim ft=js*/
+
+'use strict';
+
+var split = require('split2')
+  , pretty = require('../')
+
+process.stdin
+  .pipe(split())
+  .on('data', function (line) {
+    process.stdout.write(pretty.line(line, pretty.terminalTheme) + '\n');
+  })

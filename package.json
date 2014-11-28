@@ -6,13 +6,17 @@
   "scripts": {
     "test": "tape test/*.js"
   },
+  "bin": {
+    "pretty-trace": "bin/pretty-trace"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/thlorenz/pretty-trace.git"
   },
   "homepage": "https://github.com/thlorenz/pretty-trace",
   "dependencies": {
-    "ansicolors": "~0.2.1"
+    "ansicolors": "~0.2.1",
+    "split2": "~0.2.1"
   },
   "devDependencies": {
     "tape": "~3.0.3"
