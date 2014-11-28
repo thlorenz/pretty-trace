@@ -21,7 +21,7 @@
   "devDependencies": {
     "tape": "~3.0.3"
   },
-  "keywords": [],
+  "keywords": [ "pretty", "trace", "stack", "highlight" ],
   "author": {
     "name": "Thorsten Lorenz",
     "email": "thlorenz@gmx.de",
