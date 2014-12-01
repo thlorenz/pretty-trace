@@ -12,7 +12,7 @@ function surroundWith(start, end) {
 
 var testTheme = {
     raw      : surroundWith('-raw ', ' raw-')
-  , number   : surroundWith('-number ', ' number-')
+  , frame    : surroundWith('-frame ', ' frame-')
   , address  : surroundWith('-address ', ' address-')
   , symbol   : surroundWith('-symbol ', ' symbol-')
   , location : surroundWith('-location ', ' location-')
@@ -27,32 +27,60 @@ test('\nlldb trace single line', function (t) {
   p = pretty.line(inAtLine, testTheme)
 
   t.equal(p
-    , '-number #0   number- ' +
+    , '-frame #0   frame-' +
       '-address 0x00000001000049a6 address- ' +
-      'in -symbol node::FSEventWrap::Start(v8::FunctionCallbackInfo<v8::Value> const symbol- ' +
+      'in -symbol node::FSEventWrap::Start(v8::FunctionCallbackInfo<v8::Value> const&) symbol- ' +
       'at -location /Users/thlorenz/dev/js/node/src/fs_event_wrap.cc:115 location-'
-    , 'correctly prettifies "#x 0x0000 in ... at ..." type trace'
+    , pretty.line(inAtLine, pretty.terminalTheme)
   )
 
   p = pretty.line(inLine, testTheme)
 
   t.equal(p
-    , '-number #6   number- ' +
+    , '-frame #6   frame-' +
       '-address 0x00001226b6542c13 address- ' +
-      'in -symbol LazyCompile:~FSWatcher.start fs.js:1067 () symbol-'
-    , 'correclty prettifies "#x 0x0000 in ..." type trace'
+      'in -symbol LazyCompile:~FSWatcher.start symbol-' +
+      '-location  fs.js:1067 () location-'
+    , pretty.line(inLine, pretty.terminalTheme)
   )
 
   p = pretty.line(inLineWithPath, testTheme)
 
   t.equal(p
-    , '-number #9    number- ' +
+    , '-frame #9    frame-' +
       '-address 0x00001226b65fe54b address- ' +
-      'in -symbol LazyCompile:~watchIndex  symbol- ' +
-      'at -location /Users/thlorenz/dev/talks/memory-profiling/example/app.js:32 location-'
-    , 'correctly prettifies "#x 0x0000 in ... /path/to/file:xx" type trace"'
+      'in -symbol LazyCompile:~watchIndex symbol-' +
+      '-location  /Users/thlorenz/dev/talks/memory-profiling/example/app.js:32 () location-'
+    , pretty.line(inLineWithPath, pretty.terminalTheme)
   )
 
+
+  t.end()
+})
+
+test('\nlldb trace single line mixed', function (t) {
+  
+  [ { raw: '#10 0x1234a23b in node::Parser::on_headers_complete(http_parser*) at node_http_parser.cc:241',
+      pretty: '-frame #10  frame--address 0x1234a23b address- in -symbol node::Parser::on_headers_complete(http_parser*) symbol- at -location node_http_parser.cc:241 location-' },
+    { raw: '#9  0x00001226b65fe54b in LazyCompile:~watchIndex /Users/thlorenz/dev/talks/memory-profiling/example/app.js:32 ()',
+      pretty: '-frame #9   frame--address 0x00001226b65fe54b address- in -symbol LazyCompile:~watchIndex symbol--location  /Users/thlorenz/dev/talks/memory-profiling/example/app.js:32 () location-' },
+    { raw: 'frame #0: 0x00000001009c096c node_g`uv_fs_read(loop=0x0000000100f4b980, req=0x00007fff5fbf4fa8, file=21, bufs=0x00007fff5fbf51d0, nbufs=1, off=-1, cb=0x0000000000000000) + 44 at fs.c:1037',
+      pretty: '-frame frame #0:  frame--address 0x00000001009c096c address--symbol  node_g`uv_fs_read(loop=0x0000000100f4b980, req=0x00007fff5fbf4fa8, file=21, bufs=0x00007fff5fbf51d0, nbufs=1, off=-1, cb=0x0000000000000000) + 44 symbol- at -location fs.c:1037 location-' },
+    { raw: 'frame #1: 0x00000001009343ce node_g`node::Read(args=0x00007fff5fbf52b0) + 1502 at node_file.cc:922',
+      pretty: '-frame frame #1:  frame--address 0x00000001009343ce address--symbol  node_g`node::Read(args=0x00007fff5fbf52b0) + 1502 symbol- at -location node_file.cc:922 location-' },
+    { raw: 'frame #6: 0x00003d278f8060bb',
+      pretty: '-frame frame #6:  frame--address 0x00003d278f8060bb address--symbol  symbol--location  location-' },
+    { raw: 'frame #10: LazyCompile:~onrequest /Users/thlorenz/dev/talks/jit/examples/fs-read-sync/index.js:12',
+      pretty: '-frame frame #10:  frame--symbol LazyCompile:~onrequest symbol--location  /Users/thlorenz/dev/talks/jit/examples/fs-read-sync/index.js:12 location-' },
+    { raw: 'frame #11: LazyCompile:~emit events.js:70',
+      pretty: '-frame frame #11:  frame--symbol LazyCompile:~emit symbol--location  events.js:70 location-' },
+    { raw: 'frame #16: Stub:JSEntryStub',
+      pretty: '-frame frame #16:  frame--symbol Stub:JSEntryStub symbol--location  location-' }
+  ].forEach(check)
+
+  function check(d) {
+    t.equal(pretty.line(d.raw, testTheme), d.pretty, pretty.line(d.raw, pretty.terminalTheme));
+  }
 
   t.end()
 })
@@ -64,7 +92,7 @@ test('\ninstruments callgraph single line', function (t) {
   
   p = pretty.line(unresolvedLine, testTheme)
   t.equal(p
-    , '-number 67.0 number- ' + 
+    , '-frame 67.0 frame- ' + 
       'ms-location    97.1% location- ' +
       '-address          0x38852ff1decf address-'
     , 'correctly prettifies unresolved callgraph line'
@@ -72,7 +100,7 @@ test('\ninstruments callgraph single line', function (t) {
 
   p = pretty.line(resolvedLine, testTheme)
   t.equal(p
-    , '-number 67.0 number- ms' + 
+    , '-frame 67.0 frame- ms' + 
       '-location    97.1% location- ' + 
       '-symbol      node::TimerWrap::OnTimeout(uv_timer_s*) symbol-'
     , 'correctly prettifies resolved callgraph line'

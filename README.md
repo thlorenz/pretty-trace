@@ -40,24 +40,6 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 </div>
 <dl>
 <dt>
-<h4 class="name" id="prettyTrace::debugTraceRegex"><span class="type-signature"></span>prettyTrace::debugTraceRegex<span class="type-signature"></span></h4>
-</dt>
-<dd>
-<div class="description">
-<p>Regex used to match debug traces created by tools like lldb.</p>
-</div>
-<dl class="details">
-<dt class="tag-source">Source:</dt>
-<dd class="tag-source"><ul class="dummy">
-<li>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
-<span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L129">lineno 129</a>
-</li>
-</ul></dd>
-</dl>
-</dd>
-<dt>
 <h4 class="name" id="prettyTrace::htmlTheme"><span class="type-signature"></span>prettyTrace::htmlTheme<span class="type-signature"></span></h4>
 </dt>
 <dd>
@@ -70,17 +52,17 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L116">lineno 116</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L202">lineno 202</a>
 </li>
 </ul></dd>
 </dl>
 </dd>
 <dt>
-<h4 class="name" id="prettyTrace::instrumentsCsvRegex"><span class="type-signature"></span>prettyTrace::instrumentsCsvRegex<span class="type-signature"></span></h4>
+<h4 class="name" id="prettyTrace::regexes::instruments"><span class="type-signature"></span>prettyTrace::regexes::instruments<span class="type-signature"></span></h4>
 </dt>
 <dd>
 <div class="description">
-<p>Regex used to match callgraphs generated with Mac Instruments and exported as csv.</p>
+<p>Regexes used to match callgraphs generated with Mac Instruments.</p>
 </div>
 <dl class="details">
 <dt class="tag-source">Source:</dt>
@@ -88,17 +70,17 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L136">lineno 136</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L44">lineno 44</a>
 </li>
 </ul></dd>
 </dl>
 </dd>
 <dt>
-<h4 class="name" id="prettyTrace::perfScriptRegex"><span class="type-signature"></span>prettyTrace::perfScriptRegex<span class="type-signature"></span></h4>
+<h4 class="name" id="prettyTrace::regexes::lldb"><span class="type-signature"></span>prettyTrace::regexes::lldb<span class="type-signature"></span></h4>
 </dt>
 <dd>
 <div class="description">
-<p>Regex used to match callgraphs generated running Linux <code>perf script</code>.</p>
+<p>Regexes used to match debug traces created by tools like lldb.</p>
 </div>
 <dl class="details">
 <dt class="tag-source">Source:</dt>
@@ -106,7 +88,25 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L143">lineno 143</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L4">lineno 4</a>
+</li>
+</ul></dd>
+</dl>
+</dd>
+<dt>
+<h4 class="name" id="prettyTrace::regexes::perf"><span class="type-signature"></span>prettyTrace::regexes::perf<span class="type-signature"></span></h4>
+</dt>
+<dd>
+<div class="description">
+<p>Regexes used to match callgraphs generated running Linux perf, i.e. <code>perf script</code>.</p>
+</div>
+<dl class="details">
+<dt class="tag-source">Source:</dt>
+<dd class="tag-source"><ul class="dummy">
+<li>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
+<span>, </span>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L60">lineno 60</a>
 </li>
 </ul></dd>
 </dl>
@@ -124,7 +124,7 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L94">lineno 94</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L179">lineno 179</a>
 </li>
 </ul></dd>
 </dl>
@@ -179,7 +179,7 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 <td class="description last"><p>invoked to surround an unparsable line</p></td>
 </tr>
 <tr>
-<td class="name"><code>number</code></td>
+<td class="name"><code>frame</code></td>
 <td class="type">
 <span class="param-type">function</span>
 </td>
@@ -218,7 +218,7 @@ cat ./test/fixtures/lldb-trace.txt | pretty-trace
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L18">lineno 18</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L76">lineno 76</a>
 </li>
 </ul></dd>
 </dl>
@@ -274,7 +274,7 @@ Type
 <li>
 <a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js">pretty-trace.js</a>
 <span>, </span>
-<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L73">lineno 73</a>
+<a href="https://github.com/thlorenz/pretty-trace/blob/master/pretty-trace.js#L158">lineno 158</a>
 </li>
 </ul></dd>
 </dl>
