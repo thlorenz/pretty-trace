@@ -1,6 +1,6 @@
 {
   "name": "pretty-trace",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Stacktrace prettyfier with theme support.",
   "main": "pretty-trace.js",
   "scripts": {
