@@ -28,16 +28,19 @@ var lldb = {
         //    frame #1: 0x00000001009343ce node_g`node::Read(args=0x00007fff5fbf52b0) + 1502 at node_file.cc:922
         //    frame #6: 0x00003d278f8060bb
         desc: 'frame #x 0x0000 symbol(..) at file.c:100 OR frame #x: 0x0000'
-      , regex: /^(:?[^#]*?#\d+[:]{0,1}\W+)(:?0x(?:(?:\d|[abcdefABCDEF]){0,2})+)(:?.*?)(?:(:?\W+at\W+)(:?[^:]+:\d.+)){0,1}$/m
+      , regex: /^(:?[^#]+?#\d+[:]{0,1}\W+)(:?0x(?:(?:\d|[abcdefABCDEF]){0,2})+)(:?.+? [+] .*?)(?:(:?\W+at\W+)(:?[^:]+:\d.+)){0,1}$/
       , matches: [ 'frame', 'address', 'symbol', 'at', 'file' ]
     }
-  , frameSymLoc: {
+  , frameAddSymLoc: {
         //    frame #10: LazyCompile:~onrequest /Users/thlorenz/dev/talks/jit/examples/fs-read-sync/index.js:12
+        //    frame #10: 0x00003d278f90b52e LazyCompile:~onrequest /Users/thlorenz/dev/talks/jit/examples/fs-read-sync/index.js:12
         //    frame #11: LazyCompile:~emit events.js:70
+        //    frame #11: 0x00003d278f90b52e LazyCompile:~emit events.js:70
         //    frame #16: Stub:JSEntryStub
+        //    frame #6: 0x00003d278f8060bb
         desc: 'frame #x LazyCompile:~symbol(..) file.js:100'
-      , regex: /^(:?[^#]*?#\d+[:]{0,1}\W+)(:?[^/ ]+)(:?.+){0,1}$/m
-      , matches: [ 'frame', 'symbol', 'file' ]
+      , regex: /^(:?[^#]*?#\d+[:]{0,1}\W+)(:?0x(?:(?:\d|[abcdefABCDEF]){0,2})+){0,1}(?:(:? [^/ ]+)(:?.+){0,1}){0,1}$/m
+      , matches: [ 'frame', 'address', 'symbol', 'file' ]
     }
 }
 
@@ -122,10 +125,11 @@ function prettyLine(line, theme) {
     })
   }
 
-  pat = lldb.frameSymLoc;
+  pat = lldb.frameAddSymLoc;
   if (pat.regex.test(line)) { 
-    return line.replace(pat.regex, function (match, frame, symbol, location) {
+    return line.replace(pat.regex, function (match, frame, address, symbol, location) {
       return  theme.frame(frame)
+            + theme.address(address || '')
             + (theme.symbol(symbol || ''))
             + (theme.location(location || ''))
     })

@@ -4,6 +4,10 @@
 var test = require('tape')
   , pretty = require('../')
 
+function inspect(obj, depth) {
+  console.error(require('util').inspect(obj, false, depth || 5, true));
+}
+
 function surroundWith(start, end) {
   return function surround(x) {
     return start + x + end;
@@ -60,7 +64,8 @@ test('\nlldb trace single line', function (t) {
 
 test('\nlldb trace single line mixed', function (t) {
   
-  [ { raw: '#10 0x1234a23b in node::Parser::on_headers_complete(http_parser*) at node_http_parser.cc:241',
+  var res = 
+    [ { raw: '#10 0x1234a23b in node::Parser::on_headers_complete(http_parser*) at node_http_parser.cc:241',
       pretty: '-frame #10  frame--address 0x1234a23b address- in -symbol node::Parser::on_headers_complete(http_parser*) symbol- at -location node_http_parser.cc:241 location-' },
     { raw: '#9  0x00001226b65fe54b in LazyCompile:~watchIndex /Users/thlorenz/dev/talks/memory-profiling/example/app.js:32 ()',
       pretty: '-frame #9   frame--address 0x00001226b65fe54b address- in -symbol LazyCompile:~watchIndex symbol--location  /Users/thlorenz/dev/talks/memory-profiling/example/app.js:32 () location-' },
@@ -71,12 +76,25 @@ test('\nlldb trace single line mixed', function (t) {
     { raw: 'frame #6: 0x00003d278f8060bb',
       pretty: '-frame frame #6:  frame--address 0x00003d278f8060bb address--symbol  symbol--location  location-' },
     { raw: 'frame #10: LazyCompile:~onrequest /Users/thlorenz/dev/talks/jit/examples/fs-read-sync/index.js:12',
-      pretty: '-frame frame #10:  frame--symbol LazyCompile:~onrequest symbol--location  /Users/thlorenz/dev/talks/jit/examples/fs-read-sync/index.js:12 location-' },
+      pretty: '-frame frame #10: frame--address  address--symbol  LazyCompile:~onrequest symbol--location  /Users/thlorenz/dev/talks/jit/examples/fs-read-sync/index.js:12 location-' },
     { raw: 'frame #11: LazyCompile:~emit events.js:70',
-      pretty: '-frame frame #11:  frame--symbol LazyCompile:~emit symbol--location  events.js:70 location-' },
+      pretty: '-frame frame #11: frame--address  address--symbol  LazyCompile:~emit symbol--location  events.js:70 location-' },
     { raw: 'frame #16: Stub:JSEntryStub',
-      pretty: '-frame frame #16:  frame--symbol Stub:JSEntryStub symbol--location  location-' }
+      pretty: '-frame frame #16: frame--address  address--symbol  Stub:JSEntryStub symbol--location  location-' },
+    { raw: 'frame #10: 0x00003d278f90b52e LazyCompile:~onrequest /Users/thlorenz/dev/talks/jit/examples/fs-read-sync/index.js:12',
+      pretty: '-frame frame #10:  frame--address 0x00003d278f90b52e address--symbol  LazyCompile:~onrequest symbol--location  /Users/thlorenz/dev/talks/jit/examples/fs-read-sync/index.js:12 location-' },
+    { raw: 'frame #11: LazyCompile:~emit events.js:70',
+      pretty: '-frame frame #11: frame--address  address--symbol  LazyCompile:~emit symbol--location  events.js:70 location-' },
+    { raw: 'frame #11: 0x00003d278f90b52e LazyCompile:~emit events.js:70',
+      pretty: '-frame frame #11:  frame--address 0x00003d278f90b52e address--symbol  LazyCompile:~emit symbol--location  events.js:70 location-' } 
   ].forEach(check)
+  //].reduce(log, []) 
+  //inspect(res)
+
+  function log(acc, d) {
+    acc.push({ raw: d.raw, pretty: pretty.line(d.raw, testTheme) })
+    return acc;
+  }
 
   function check(d) {
     t.equal(pretty.line(d.raw, testTheme), d.pretty, pretty.line(d.raw, pretty.terminalTheme));
