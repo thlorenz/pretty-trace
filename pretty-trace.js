@@ -183,7 +183,7 @@ function prettyLines(lines, theme) {
  */
 exports.terminalTheme = {
     raw      : colors.white
-  , frame    : colors.blue
+  , frame    : colors.brightGreen
   , address  : colors.brightBlack
   , symbol   : colors.brightBlue
   , location : colors.brightBlack
